@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ff6a00">
+<title>Fuchsi Travel</title>
+<style>
+:root{--orange:#ff6a00;--blue:#1261c9;--cream:#fff8ef;--ink:#172231;--muted:#6b7785;--card:#fff;--green:#2ccf68;--line:#e7edf3}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(#0d5ac2 0 22%,var(--cream) 22%);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink)}
+button{font:inherit;border:0}
+.app{max-width:520px;margin:auto;min-height:100vh;padding-bottom:84px}
+.top{padding:14px;color:#fff}.brand{font-weight:900;font-size:22px}.stats{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.pill{background:#ffffff22;border:1px solid #ffffff33;padding:7px 10px;border-radius:999px;font-weight:800;font-size:12px}
+.screen{padding:0 14px}.hero{margin-top:8px;background:#cfeaff;border-radius:24px;overflow:hidden;box-shadow:0 10px 30px #14233318}.hero img{display:block;width:100%;height:250px;object-fit:cover}.heroFallback{height:250px;display:grid;place-items:center;font-size:100px;background:linear-gradient(135deg,#dff0ff,#fff0df)}.bubble{padding:14px;background:#fff}.bubble b{font-size:18px}.muted{color:var(--muted);font-size:13px}
+.card{background:var(--card);border-radius:20px;padding:15px;box-shadow:0 8px 28px #14233314;margin-top:12px}.progress{height:10px;background:#edf1f4;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;background:linear-gradient(90deg,var(--green),#56e47d)}
+.cta{width:100%;padding:14px;border-radius:15px;background:var(--orange);color:#fff;font-weight:900;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:12px}.tile{background:#fff;border-radius:18px;padding:15px;text-align:center;box-shadow:0 8px 24px #14233312;font-weight:800}.tile .ic{font-size:28px;display:block;margin-bottom:6px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fffffff4;border-top:1px solid #eee}.navin{max-width:520px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr)}.nav button{padding:10px 2px;background:transparent;color:#65727f;font-size:11px;font-weight:800}.nav button b{display:block;font-size:22px}.nav button.on{color:var(--orange)}
+.row{display:flex;align-items:center;gap:12px}.avatar{width:58px;height:58px;border-radius:50%;background:#ffe1cc;display:grid;place-items:center;font-size:32px}.lesson{display:flex;gap:12px;align-items:center}.lesson .ico{width:45px;height:45px;border-radius:14px;background:#eff6ff;display:grid;place-items:center;font-size:22px}.lesson .meta{flex:1}.small{font-size:12px;color:var(--muted)}.list .card{display:flex;align-items:center;gap:12px}.map{position:relative;min-height:560px;border-radius:24px;background:linear-gradient(#cfefff,#b8d9a5);overflow:hidden;box-shadow:0 8px 28px #14233312}.route{position:absolute;left:49%;top:10%;height:78%;border-left:6px dotted #ffffff}.city{position:absolute;background:#fff;padding:10px 12px;border-radius:16px;box-shadow:0 8px 20px #14233318;font-weight:900}.city small{display:block;font-size:11px;color:var(--muted)}.c1{top:12%;left:55%}.c2{top:30%;left:40%}.c3{top:48%;left:32%}.c4{top:66%;left:53%}.c5{top:82%;left:38%}
+.chat{display:flex;gap:8px;margin:10px 0}.chat.you{justify-content:flex-end}.msg{max-width:82%;background:#fff;padding:11px 13px;border-radius:17px;box-shadow:0 8px 20px #14233312}.you .msg{background:#dff0ff}.input{position:sticky;bottom:74px;display:flex;gap:8px;background:#fff;padding:8px;border-radius:16px;box-shadow:0 8px 24px #14233316}.input input{flex:1;border:0;outline:0;background:#f5f7f9;padding:10px;border-radius:12px}.send{background:var(--orange);color:#fff;border-radius:12px;width:45px}
+.avatarGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.av{background:#fff;border:2px solid transparent;border-radius:16px;padding:8px;text-align:center;font-size:30px}.av.on{border-color:var(--orange)}
+.back{background:#fff0;color:var(--ink);font-size:28px}
+h2{margin:0 0 4px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div id="app" class="app"></div>
+<script>
+(function(){
+  "use strict";
+  const defaultState={name:"Hasan",fp:0,coins:120,streak:7,unit:1,avatar:"🧑🏻‍💼"};
+  let state=defaultState;
+  try{const x=JSON.parse(localStorage.getItem("fuchsi")||"null");if(x&&typeof x==="object")state=Object.assign({},defaultState,x);}catch(e){}
+  const units=[
+    ["Selamlaşma","Guten Morgen! · Hallo! · Tschüss!","👋"],
+    ["Kendini Tanıtma","Ich heiße… · Ich bin… · Wo wohnst du?","🙋"],
+    ["Aile","Meine Mutter · mein Bruder · Ich habe…","👨‍👩‍👧"],
+    ["Sayılar & Saat","0–100 · Wie spät ist es?","🔢"],
+    ["Günlük Rutin","Ich arbeite · Ich lerne · Ich schlafe","☀️"],
+    ["Ev & Şehir","Zimmer · Küche · Bahnhof · links · rechts","🏠"],
+    ["Ulaşım","Bus · Zug · Ticket · Bahnhof","🚆"],
+    ["Alışveriş","Ich möchte… · Wie viel kostet das?","🛍️"],
+    ["Yeme & İçme","Essen · Trinken · Restaurant","🍎"],
+    ["Sağlık","Arzt · Apotheke · Hilfe","🩺"],
+    ["Hava & Mevsimler","Sonne · Regen · kalt · warm","🌦️"],
+    ["Hobi & Boş Zaman","Musik · Fußball · Wochenende","🎮"],
+    ["Seyahat & Otel","Zimmer · Ankunft · Abfahrt","🧳"],
+    ["Randevu & Mesaj","Termin · treffen · absagen","💬"],
+    ["A1 Final","Hören · Lesen · Schreiben · Sprechen","🏆"]
+  ];
+  function save(){try{localStorage.setItem("fuchsi",JSON.stringify(state));}catch(e){}}
+  function greet(){const h=new Date().getHours();if(h<5)return"Gute Nacht";if(h<11)return"Guten Morgen";if(h<18)return"Guten Tag";if(h<22)return"Guten Abend";return"Gute Nacht";}
+  function hero(){return '<img src="fuchsi_hero.png" onerror="this.outerHTML=\\'<div class="heroFallback">🦊</div>\\'">';}
+  function nav(active){const items=[["home","🏠","Ana"],["map","🗺️","Almanya"],["lessons","📚","Dersler"],["chat","🦊","Fuchsi"],["profile","👤","Profil"]];return '<div class="nav"><div class="navin">'+items.map(x=>'<button class="'+(active===x[0]?"on":"")+'" data-nav="'+x[0]+'"><b>'+x[1]+'</b>'+x[2]+'</button>').join("")+'</div></div>';}
+  function app(body,active){document.getElementById("app").innerHTML=body+nav(active);document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=function(){go(this.dataset.nav);});}
+  function top(){return '<div class="top"><div class="brand">🦊 Fuchsi Travel</div><div class="stats"><span class="pill">🔥 '+state.streak+' gün</span><span class="pill">⭐ '+state.fp+' FP</span><span class="pill">🪙 '+state.coins+'</span></div></div>';}
+  function home(){app(top()+'<main class="screen"><div class="hero">'+hero()+'<div class="bubble"><b>'+greet()+', '+state.name+'! ☀️</b><div class="muted">Heute lernen wir in Berlin. Fuchsi hazır! 🦊</div></div></div><div class="card"><div class="row"><div class="avatar">'+state.avatar+'</div><div><div class="small">Level 1 · Berlin</div><h2>Selamlaşma</h2><div class="progress"><i style="width:'+Math.min(100,(state.fp%500)/5)+'%"></i></div><div class="small">'+(state.fp%500)+' / 500 FP</div></div></div><button class="cta" data-lesson="0">Derse Başla 🚀</button></div><div class="grid"><div class="tile" data-nav="lessons"><span class="ic">📗</span>Kelimeler</div><div class="tile" data-nav="lessons"><span class="ic">💬</span>Kalıplar</div><div class="tile" data-nav="lessons"><span class="ic">🎓</span>Gramer</div><div class="tile" data-nav="map"><span class="ic">🇩🇪</span>Almanya</div></div><div class="card"><b>🎯 Günlük hedef</b><div class="small">Bugün 10–15 dakika çalış. Kelime + cümle + mini test.</div></div></main>','home');bind(); }
+  function lessons(){let html=top()+'<main class="screen"><div class="card"><h2>A1 Dersleri</h2><div class="small">Berlin’den başlayıp Almanya’yı keşfet.</div></div><div class="list">'+units.map((u,i)=>'<div class="card" data-lesson="'+i+'"><div class="lesson"><div class="ico">'+u[2]+'</div><div class="meta"><b>'+(i+1)+'. '+u[0]+'</b><div class="small">'+u[1]+'</div><div class="small">'+(i<state.unit?"✅ Açık":"🔒 İlerledikçe açılır")+'</div></div></div></div>').join("")+'</div></main>';app(html,"lessons");bind();}
+  function lesson(i){const u=units[i]||units[0];app(top()+'<main class="screen"><div class="card"><button class="back" data-nav="lessons">‹</button><h2>'+u[0]+'</h2><div class="small">A1 · kısa, tekrar eden ve üretim odaklı</div></div><div class="card"><div style="font-size:56px;text-align:center">'+u[2]+'</div><h2>Önce anlam</h2><p>'+u[1]+'</p><button class="cta" data-speak="Hallo! Wie geht’s dir?">🔊 Almancayı Dinle</button></div><div class="card"><h2>Mini test</h2><p>“İyi akşamlar” hangisi?</p><button class="cta" data-answer="bad">Guten Morgen</button><button class="cta" data-answer="good">Guten Abend</button><button class="cta" data-answer="bad">Hallo</button></div><button class="cta" id="complete">Dersi Tamamla +25 FP</button></main>','lessons');bind();}
+  function map(){app(top()+'<main class="screen"><div class="card"><h2>Almanya Yolculuğu 🇩🇪</h2><div class="small">Şehirler ilerledikçe açılır.</div></div><div class="map"><div class="route"></div><div class="city c1">Berlin<small>Level 1</small></div><div class="city c2">Hamburg<small>Level 2</small></div><div class="city c3">Köln<small>Level 3</small></div><div class="city c4">München<small>Level 4</small></div><div class="city c5">Frankfurt<small>Final</small></div></div></main>','map');bind();}
+  function chat(){app(top()+'<main class="screen"><div class="card"><h2>Fuchsi ile Sohbet 🦊</h2><div class="small">A1 seviyesinde konuş. Hata yap, düzelt, tekrar et.</div></div><div id="msgs"></div><div class="input"><input id="chatin" placeholder="Örn. Mir geht gut."><button class="send" id="send">➤</button></div></main>','chat');bind();addMsg("fuchsi","Hallo "+state.name+"! 👋 Wie geht’s dir heute?");}
+  function addMsg(who,text){const b=document.getElementById("msgs");if(!b)return;const div=document.createElement("div");div.className="chat "+(who==="you"?"you":"");div.innerHTML='<div class="msg">'+text+'</div>';b.appendChild(div);}
+  function reply(t){const x=t.toLowerCase();if(x.includes("mir geht gut"))return"Fast! 😊 Doğrusu: <b>Mir geht es gut.</b> Burada <b>es</b> gerekir.";if(x.includes("hallo")||x.includes("guten morgen"))return"Sehr gut! 👏 Şimdi sor: <b>Wie geht’s dir?</b>";if(x.includes("heiße")||x.includes("heisse"))return"Perfekt! 🎉 <b>Ich heiße "+state.name+".</b> Şimdi: <b>Wie heißt du?</b>";return"Super! 🦊 Cümleni biraz daha uzat: <b>Heute …</b> / <b>In Berlin …</b> / <b>Mit meiner Familie …</b>";}
+  function profile(){app(top()+'<main class="screen"><div class="card"><div class="row"><div class="avatar" style="font-size:40px">'+state.avatar+'</div><div><h2>'+state.name+'</h2><div class="small">Level 1 · Berlin</div></div></div><button class="cta" data-nav="avatar">Avatarı Düzenle</button></div><div class="grid"><div class="tile"><span class="ic">🔥</span>'+state.streak+' gün</div><div class="tile"><span class="ic">⭐</span>'+state.fp+' FP</div><div class="tile"><span class="ic">🪙</span>'+state.coins+'</div><div class="tile"><span class="ic">📚</span>'+state.unit+'/15</div></div></main>','profile');bind();}
+  function avatar(){const faces=["🧑🏻‍💼","👩🏻‍💼","🧑🏽‍🎓","👩🏽‍🎓","🧑🏿‍💻","👩🏿‍💻","🧔🏻","👩🏻‍🦰","👨🏽‍🦱","👩🏽‍🦱","🧑🏼‍🎨","👨🏻‍🦲"];app(top()+'<main class="screen"><div class="card"><h2>Avatarını oluştur</h2><div class="small">Kız, erkek ve farklı stiller</div><div class="avatarGrid" style="margin-top:12px">'+faces.map(f=>'<button class="av '+(f===state.avatar?"on":"")+'" data-av="'+f+'">'+f+'</button>').join("")+'</div><button class="cta" data-nav="profile">Kaydet ✅</button></div></main>','profile');bind();}
+  function go(x){if(x==="home")home();else if(x==="map")map();else if(x==="lessons")lessons();else if(x==="chat")chat();else if(x==="profile")profile();else if(x==="avatar")avatar();}
+  function bind(){
+    document.querySelectorAll("[data-nav]").forEach(b=>b.onclick=function(){go(this.dataset.nav);});
+    document.querySelectorAll("[data-lesson]").forEach(b=>b.onclick=function(){lesson(Number(this.dataset.lesson));});
+    document.querySelectorAll("[data-speak]").forEach(b=>b.onclick=function(){try{const u=new SpeechSynthesisUtterance(this.dataset.speak);u.lang="de-DE";speechSynthesis.cancel();speechSynthesis.speak(u);}catch(e){}});
+    document.querySelectorAll("[data-answer]").forEach(b=>b.onclick=function(){if(this.dataset.answer==="good"){state.fp+=10;state.coins+=1;save();this.textContent="✅ Doğru! +10 FP";}else this.textContent="❌ Tekrar düşün";});
+    const complete=document.getElementById("complete");if(complete)complete.onclick=function(){state.fp+=25;state.coins+=1;state.unit=Math.min(units.length,state.unit+1);save();alert("Ders tamamlandı! +25 FP");go("lessons");};
+    const send=document.getElementById("send");if(send)send.onclick=function(){const inp=document.getElementById("chatin");if(!inp||!inp.value.trim())return;const v=inp.value.trim();addMsg("you",v);inp.value="";addMsg("fuchsi",reply(v));state.fp+=5;save();};
+    document.querySelectorAll("[data-av]").forEach(b=>b.onclick=function(){state.avatar=this.dataset.av;save();avatar();});
+  }
+  home();
+})();
+</script>
+</body>
+</html>

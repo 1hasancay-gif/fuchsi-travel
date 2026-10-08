@@ -1,0 +1,71 @@
+name: Fuchsi Travel APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: ["main", "master"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repoyu indir
+        uses: actions/checkout@v5
+
+      - name: Java 17 kur
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Gradle kur
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Fuchsi Travel projesini çıkar
+        shell: bash
+        run: |
+          set -e
+          mkdir -p build-src
+          ZIP=""
+          for f in *.zip; do
+            [ -f "$f" ] || continue
+            case "$f" in
+              *Fuchsi*|*fuchsi*) ZIP="$f"; break;;
+            esac
+          done
+
+          if [ -z "$ZIP" ]; then
+            echo "Fuchsi Travel ZIP bulunamadı."
+            exit 1
+          fi
+
+          unzip -q -o "$ZIP" -d build-src
+
+          PROJECT_DIR=$(find build-src \
+            \( -name settings.gradle -o -name settings.gradle.kts \) \
+            -print -quit | xargs -r dirname)
+
+          if [ -z "$PROJECT_DIR" ] || \
+             { [ ! -f "$PROJECT_DIR/settings.gradle" ] && \
+               [ ! -f "$PROJECT_DIR/settings.gradle.kts" ]; }; then
+            echo "Gradle projesi bulunamadı."
+            exit 1
+          fi
+
+          echo "PROJECT_DIR=$PROJECT_DIR" >> "$GITHUB_ENV"
+
+      - name: APK oluştur
+        shell: bash
+        run: |
+          set -e
+          cd "$PROJECT_DIR"
+          gradle assembleDebug --no-daemon
+
+      - name: APK'yı yükle
+        uses: actions/upload-artifact@v6
+        with:
+          name: Fuchsi-Travel-APK
+          path: ${{ env.PROJECT_DIR }}/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

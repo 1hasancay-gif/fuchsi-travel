@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ff6a00">
+<title>Fuchsi Travel</title>
+<style>
+:root{--o:#ff6a00;--b:#1261c9;--c:#fff8ef;--ink:#172231;--muted:#6e7b88;--white:#fff;--line:#e8edf2;--green:#2ccf68}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:linear-gradient(#0d5ac2 0 210px,var(--c) 210px);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;color:var(--ink)}
+a{text-decoration:none;color:inherit}.app{max-width:520px;margin:auto;padding:0 14px 90px}
+.top{padding:16px 0 10px;color:#fff}.brand{font-size:23px;font-weight:950}.stats{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}.pill{background:#ffffff21;border:1px solid #ffffff36;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:900}
+.hero{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 10px 28px #1b2b3c18}.heroimg{height:235px;background:linear-gradient(135deg,#dff0ff,#fff0df);display:grid;place-items:center;font-size:110px;position:relative}.heroimg img{width:100%;height:100%;object-fit:cover}.bubble{padding:15px}.bubble b{font-size:18px}.muted{font-size:13px;color:var(--muted)}
+.card{background:#fff;border-radius:20px;padding:15px;box-shadow:0 8px 25px #1b2b3c12;margin-top:12px}.row{display:flex;gap:12px;align-items:center}.avatar{width:58px;height:58px;border-radius:50%;background:#ffe2cf;display:grid;place-items:center;font-size:31px}.progress{height:10px;background:#eaf0f4;border-radius:999px;overflow:hidden;margin-top:7px}.progress i{display:block;height:100%;width:23%;background:linear-gradient(90deg,var(--green),#58e680)}.cta{display:block;width:100%;background:var(--o);color:#fff;padding:14px;border-radius:15px;font-weight:950;text-align:center;margin-top:12px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.tile{background:#fff;border-radius:18px;padding:12px 7px;text-align:center;box-shadow:0 7px 20px #1b2b3c10;font-size:12px;font-weight:850}.tile b{display:block;font-size:24px;margin-bottom:3px}
+section{scroll-margin-top:8px}.sectiontitle{font-size:20px;font-weight:950;margin:22px 0 8px}
+.lesson{display:flex;gap:11px;align-items:center}.ico{width:44px;height:44px;border-radius:14px;background:#eff6ff;display:grid;place-items:center;font-size:22px}.meta{flex:1}.small{font-size:12px;color:var(--muted)}
+.map{height:450px;border-radius:24px;background:linear-gradient(#d5f1ff 0 34%,#bddaa5 34%);position:relative;overflow:hidden}.route{position:absolute;left:48%;top:10%;height:80%;border-left:6px dotted #fff}.city{position:absolute;background:#fff;border-radius:15px;padding:9px 11px;box-shadow:0 7px 20px #1b2b3c18;font-weight:900;font-size:13px}.city small{display:block;font-weight:650;color:var(--muted);font-size:11px}.c1{top:12%;left:53%}.c2{top:30%;left:39%}.c3{top:48%;left:31%}.c4{top:66%;left:53%}.c5{top:82%;left:39%}
+.chat{padding:12px;background:#fff;border-radius:17px;box-shadow:0 7px 20px #1b2b3c10;margin:8px 0}.you{background:#dff0ff;text-align:right}
+.avatars{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.av{background:#fff;border:2px solid var(--line);border-radius:16px;padding:9px;text-align:center;font-size:31px}
+.nav{position:fixed;left:0;right:0;bottom:0;background:#fffffff4;border-top:1px solid var(--line)}.navin{max-width:520px;margin:auto;display:grid;grid-template-columns:repeat(5,1fr)}.nav a{padding:10px 2px;text-align:center;font-size:10px;font-weight:900;color:#677583}.nav b{display:block;font-size:22px}
+.notice{background:#fff3df;border:1px solid #ffd6ab;border-radius:16px;padding:12px;font-size:12px;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="app">
+
+<div class="top">
+  <div class="brand">🦊 Fuchsi Travel</div>
+  <div class="stats">
+    <span class="pill">🔥 7 gün</span><span class="pill">⭐ 0 FP</span><span class="pill">🪙 120</span>
+  </div>
+</div>
+
+<main id="ana">
+  <div class="hero">
+    <div class="heroimg">
+      <img src="fuchsi_hero.png" alt="Fuchsi" onerror="this.style.display='none'">
+      <span>🦊</span>
+    </div>
+    <div class="bubble"><b>Guten Abend, Hasan! 🌆</b><div class="muted">Heute lernen wir in Berlin. Fuchsi hazır! 🇩🇪</div></div>
+  </div>
+
+  <div class="card">
+    <div class="row"><div class="avatar">🧑🏻‍💼</div><div style="flex:1"><div class="small">Level 1 · Berlin</div><b>Selamlaşma</b><div class="progress"><i></i></div><div class="small">0 / 500 FP</div></div></div>
+    <a class="cta" href="#ders">Derse Başla 🚀</a>
+  </div>
+
+  <div class="grid4" style="margin-top:12px">
+    <a class="tile" href="#ders"><b>📗</b>Kelimeler</a>
+    <a class="tile" href="#ders"><b>💬</b>Kalıplar</a>
+    <a class="tile" href="#ders"><b>🎓</b>Gramer</a>
+    <a class="tile" href="#almanya"><b>🇩🇪</b>Almanya</a>
+  </div>
+
+  <div class="card"><b>🎯 Günlük hedef</b><div class="muted">Bugün 10–15 dakika: kelime + cümle + mini test.</div></div>
+</main>
+
+<section id="ders">
+  <div class="sectiontitle">📚 A1 Dersleri</div>
+  <div class="card lesson"><div class="ico">👋</div><div class="meta"><b>1. Selamlaşma</b><div class="small">Hallo · Guten Morgen · Guten Abend · Tschüss</div></div><span>✅</span></div>
+  <div class="card lesson"><div class="ico">🙋</div><div class="meta"><b>2. Kendini Tanıtma</b><div class="small">Ich heiße · Ich bin · Wo wohnst du?</div></div><span>🔒</span></div>
+  <div class="card lesson"><div class="ico">👨‍👩‍👧</div><div class="meta"><b>3. Aile</b><div class="small">Meine Mutter · mein Bruder · Ich habe…</div></div><span>🔒</span></div>
+
+  <div class="card">
+    <h3>🦊 Ders 1 · Selamlaşma</h3>
+    <p><b>Hallo</b> = Merhaba<br><b>Guten Morgen</b> = Günaydın<br><b>Guten Tag</b> = İyi günler<br><b>Guten Abend</b> = İyi akşamlar<br><b>Tschüss</b> = Hoşça kal</p>
+    <div class="notice">🧠 Hedef: önce anlam → sonra dinle → bakmadan hatırla → cümlede kullan.</div>
+  </div>
+</section>
+
+<section id="almanya">
+  <div class="sectiontitle">🗺️ Almanya Yolculuğu</div>
+  <div class="map">
+    <div class="route"></div>
+    <div class="city c1">Berlin<small>Level 1 · Selamlaşma</small></div>
+    <div class="city c2">Hamburg<small>Level 2 · Tanıtma</small></div>
+    <div class="city c3">Köln<small>Level 3 · Aile</small></div>
+    <div class="city c4">München<small>Level 4 · Rutin</small></div>
+    <div class="city c5">Frankfurt<small>Final</small></div>
+  </div>
+</section>
+
+<section id="fuchsi">
+  <div class="sectiontitle">🦊 Fuchsi ile Sohbet</div>
+  <div class="chat"><b>Fuchsi:</b> Hallo Hasan! Wie geht’s dir heute?</div>
+  <div class="chat you">Mir geht gut.</div>
+  <div class="chat"><b>Fuchsi:</b> Fast! 😊 Doğrusu: <b>Mir geht es gut.</b><br><span class="muted">Burada “es” gerekir.</span></div>
+  <div class="chat"><b>Fuchsi:</b> Jetzt bist du dran! → Wie heißt du?</div>
+</section>
+
+<section id="profil">
+  <div class="sectiontitle">👤 Profil</div>
+  <div class="card row"><div class="avatar">🧑🏻‍💼</div><div><h3 style="margin:0">Hasan</h3><div class="small">Level 1 · Berlin</div></div></div>
+  <div class="sectiontitle">Avatarlar</div>
+  <div class="avatars">
+    <div class="av">🧑🏻‍💼</div><div class="av">👩🏻‍💼</div><div class="av">🧑🏽‍🎓</div><div class="av">👩🏽‍🎓</div>
+    <div class="av">🧑🏿‍💻</div><div class="av">👩🏿‍💻</div><div class="av">🧔🏻</div><div class="av">👩🏻‍🦰</div>
+    <div class="av">👨🏽‍🦱</div><div class="av">👩🏽‍🦱</div><div class="av">🧑🏼‍🎨</div><div class="av">👨🏻‍🦲</div>
+  </div>
+</section>
+
+</div>
+
+<nav class="nav"><div class="navin">
+<a href="#ana"><b>🏠</b>Ana</a><a href="#almanya"><b>🗺️</b>Almanya</a><a href="#ders"><b>📚</b>Dersler</a><a href="#fuchsi"><b>🦊</b>Fuchsi</a><a href="#profil"><b>👤</b>Profil</a>
+</div></nav>
+</body>
+</html>
